@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face{font-family:'Sora';font-weight:600;src:url('fonts/sora-latin-600-normal.woff2') format('woff2');font-display:block}
+  @font-face{font-family:'Sora';font-weight:700;src:url('fonts/sora-latin-700-normal.woff2') format('woff2');font-display:block}
+  @font-face{font-family:'Sora';font-weight:800;src:url('fonts/sora-latin-800-normal.woff2') format('woff2');font-display:block}
+  @font-face{font-family:'Inter';font-weight:400;src:url('fonts/inter-latin-400-normal.woff2') format('woff2');font-display:block}
+  @font-face{font-family:'Inter';font-weight:600;src:url('fonts/inter-latin-600-normal.woff2') format('woff2');font-display:block}
+  @font-face{font-family:'JBMono';font-weight:400;src:url('fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');font-display:block}
+  @font-face{font-family:'JBMono';font-weight:500;src:url('fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');font-display:block}
+
+  :root{
+    --navy1:#071327; --navy2:#0c2550; --ink:#eaf1ff; --muted:#9fb3d6;
+    --blue:#3f8cff; --blue2:#63a4ff; --teal:#3fe0c5; --line:rgba(120,160,230,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1280px;height:720px}
+  body{
+    font-family:'Inter',sans-serif;
+    background:
+      radial-gradient(1100px 700px at 86% -10%, rgba(63,140,255,.22), transparent 60%),
+      radial-gradient(900px 600px at -5% 110%, rgba(63,224,197,.14), transparent 55%),
+      linear-gradient(135deg,var(--navy1),var(--navy2));
+    color:var(--ink); position:relative; overflow:hidden;
+  }
+  /* dotted grid */
+  .grid{position:absolute;inset:0;
+    background-image:radial-gradient(rgba(150,180,240,.10) 1.3px, transparent 1.3px);
+    background-size:34px 34px; mask-image:linear-gradient(120deg,#000,transparent 75%);}
+  .glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5}
+  .g1{width:420px;height:420px;background:#2f6bff;top:-150px;right:-90px}
+  .g2{width:360px;height:360px;background:#17c9b0;bottom:-170px;left:-120px;opacity:.35}
+
+  .frame{position:absolute;inset:26px;border:1px solid var(--line);border-radius:22px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}
+  .wrap{position:relative;height:100%;display:flex;align-items:center;gap:40px;padding:64px 72px}
+
+  .left{flex:1.25;min-width:0}
+  .kicker{display:flex;align-items:center;gap:12px;color:var(--muted);
+    font-weight:600;font-size:15px;letter-spacing:3px;text-transform:uppercase;margin-bottom:26px}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 12px var(--teal)}
+  #headline{font-family:'Sora',sans-serif;font-weight:800;font-size:58px;line-height:1.08;
+    letter-spacing:-1.2px;color:#fff;text-wrap:balance}
+  #headline .hl{color:var(--blue2);
+    text-shadow:0 0 26px rgba(79,155,255,.45)}
+  .bar{height:5px;width:120px;margin:34px 0 22px;border-radius:3px;
+    background:linear-gradient(90deg,var(--blue),var(--teal))}
+  .sub{color:var(--muted);font-size:19px;font-weight:400;max-width:560px;line-height:1.5}
+  .handle{position:absolute;left:72px;bottom:46px;display:flex;align-items:center;gap:10px;
+    color:#cfe0ff;font-weight:600;font-size:17px}
+  .handle .av{width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,var(--blue),var(--teal));display:grid;place-items:center;
+    font-family:'Sora';font-weight:800;font-size:12px;color:#06122a}
+
+  /* code card */
+  .right{flex:.95;display:flex;justify-content:flex-end}
+  .card{width:420px;border-radius:18px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(17,32,64,.92),rgba(10,22,46,.92));
+    border:1px solid rgba(120,160,230,.22);
+    box-shadow:0 30px 70px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.03), 0 0 60px rgba(47,107,255,.18);
+    backdrop-filter:blur(6px)}
+  .card .top{display:flex;align-items:center;gap:8px;padding:14px 18px;
+    border-bottom:1px solid rgba(120,160,230,.14);background:rgba(255,255,255,.02)}
+  .tl{width:11px;height:11px;border-radius:50%}
+  .r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+  .card .file{margin-left:10px;color:#8fa6cc;font-family:'JBMono';font-size:12.5px}
+  .code{padding:20px 20px 22px;font-family:'JBMono';font-size:14px;line-height:1.85}
+  .code .ln{white-space:pre}
+  .cm{color:#5f7392}.kw{color:#7aa2ff}.fn{color:#5fd0b6}.st{color:#f0b86e}.vr{color:#cfe0ff}.num{color:#f0a0c0}
+  .badge{display:inline-flex;align-items:center;gap:8px;margin:4px 20px 20px;padding:9px 14px;border-radius:10px;
+    background:rgba(40,200,120,.12);border:1px solid rgba(40,200,120,.4);color:#8ff0bf;
+    font-family:'Inter';font-weight:600;font-size:13px}
+  .badge .ck{width:16px;height:16px;border-radius:50%;background:#28c840;display:grid;place-items:center;color:#06231a;font-size:11px;font-weight:800}
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="frame"></div>
+  <div class="wrap">
+    <div class="left">
+      <div class="kicker"><span class="dot"></span><span id="kicker">SHAHRIAR SHUVO · AI &amp; AUTOMATION ENGINEERING</span></div>
+      <h1 id="headline">AI didn't make us faster at writing code. It made us <span class="hl">slower at shipping bad code.</span></h1>
+      <div class="bar"></div>
+      <p class="sub" id="sub">A year of building with AI in a real engineering team.</p>
+      <div class="handle"><span class="av">S</span><span id="handle">@shuvogt · linkedin.com/in/shuvogt</span></div>
+    </div>
+    <div class="right">
+      <div class="card">
+        <div class="top"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span><span class="file" id="file">deploy.ts</span></div>
+        <div class="code" id="code"><div class="ln"><span class="cm">// review → test → ship</span></div><div class="ln"><span class="kw">const</span> <span class="vr">change</span> = <span class="fn">review</span>(<span class="vr">draft</span>)</div><div class="ln">  .<span class="fn">test</span>()</div><div class="ln">  .<span class="fn">monitor</span>()</div><div class="ln"><span class="kw">if</span> (<span class="vr">change</span>.<span class="vr">understood</span>)</div><div class="ln">  <span class="fn">ship</span>(<span class="st">'stays shipped'</span>)</div></div>
+        <div class="badge"><span class="ck">✓</span>merge approved · CI green</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

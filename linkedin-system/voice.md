@@ -41,6 +41,12 @@
 - First person, real stories from his actual work only.
 - One specific true thing per post. No padding.
 
+## Image rule (mandatory, every post)
+- Every image is a **HOOK GRAPHIC**: the post's hook headline appears **ON the image** as large, bold, perfectly-spelled text — the hero element, not decoration.
+- Condense a long hook to one or two short punchy lines; keep the meaning.
+- Consistent style: 16:9 banner, deep navy `#0a1a3a` background, subtle dotted grid + faint electric-blue line-art accents, large white sans-serif headline (Inter/Helvetica look), a key phrase emphasized in electric blue `#2f80ff`, thin accent line, lots of space, editorial magazine quality. No people, no robots, no stock imagery.
+- Generate with gpt-image-2 (best text rendering); write the exact headline in quotes in the prompt so it renders verbatim.
+
 ## Things he would never say
 - "Excited to announce" for trivial things.
 - Hashtag walls (#️⃣ x15).
